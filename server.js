@@ -54,9 +54,13 @@ const server = http.createServer((req, res) => {
       200,
       [ 
         "Open the folder command prompt where you want the files",
-        "Run iex(irm https://cse2026bc.onrender.com/1)",
-        "Use 2, 3, 4, 5, or 6 instead of 1 for the other folders.",
-        "Lab manual: https://cse2026bc.onrender.com/m",
+        "Run for exprimenet 1: iex(irm https://cse2026bc.onrender.com/1)",
+        "Run for exprimenet 2: iex(irm https://cse2026bc.onrender.com/2)",
+        "Run for exprimenet 3: iex(irm https://cse2026bc.onrender.com/3)",
+        "Run for exprimenet 4: iex(irm https://cse2026bc.onrender.com/4)",
+        "Run for exprimenet 5: iex(irm https://cse2026bc.onrender.com/5)",
+        "Run for exprimenet 6: iex(irm https://cse2026bc.onrender.com/6)",
+        "Download Lab manual: https://cse2026bc.onrender.com/m",
         "",
       ].join("\n")
     );
