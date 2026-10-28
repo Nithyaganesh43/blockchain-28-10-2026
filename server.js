@@ -56,9 +56,26 @@ const server = http.createServer((req, res) => {
         "Open the folder where you want the files.",
         " Run iex(irm http://localhost:3000/1)",
         "Use 2, 3, 4, 5, or 6 instead of 1 for the other folders.",
+        "Lab manual: http://localhost:3000/m",
         "",
       ].join("\n")
     );
+    return;
+  }
+
+  if (pathname === "/m") {
+    const manual = path.join(ROOT, "Blockchain Technologies Lab Manual.pdf");
+    if (!fs.existsSync(manual)) {
+      sendText(res, 404, "Not found\n");
+      return;
+    }
+    res.writeHead(200, {
+      "Content-Type": "application/pdf",
+      "Content-Length": fs.statSync(manual).size,
+      "Content-Disposition":
+        'attachment; filename="Blockchain Technologies Lab Manual.pdf"',
+    });
+    fs.createReadStream(manual).pipe(res);
     return;
   }
 
