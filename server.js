@@ -53,10 +53,10 @@ const server = http.createServer((req, res) => {
       res,
       200,
       [ 
-        "Open the folder where you want the files.",
-        " Run iex(irm http://localhost:3000/1)",
+        "Open the folder command prompt where you want the files",
+        "Run iex(irm https://cse2026bc.onrender.com/1)",
         "Use 2, 3, 4, 5, or 6 instead of 1 for the other folders.",
-        "Lab manual: http://localhost:3000/m",
+        "Lab manual: https://cse2026bc.onrender.com/m",
         "",
       ].join("\n")
     );
