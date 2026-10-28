@@ -52,12 +52,10 @@ const server = http.createServer((req, res) => {
     sendText(
       res,
       200,
-      [
-        "1. Open a terminal in this folder.",
-        "2. Run node server.js",
-        "3. Open the folder where you want the files.",
-        "4. Run iex(irm http://localhost:3000/1)",
-        "5. Use 2, 3, 4, 5, or 6 instead of 1 for the other folders.",
+      [ 
+        "Open the folder where you want the files.",
+        " Run iex(irm http://localhost:3000/1)",
+        "Use 2, 3, 4, 5, or 6 instead of 1 for the other folders.",
         "",
       ].join("\n")
     );
