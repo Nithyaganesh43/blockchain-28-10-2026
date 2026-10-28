@@ -1,0 +1,7 @@
+{
+  "name": "blockchain-practicals",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  }
+}
