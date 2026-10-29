@@ -5,7 +5,22 @@ const path = require("path");
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT) || 3000;
 const logs = [];
-const hits = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, m: 0 };
+const hits = {
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+  6: 0,
+  s1: 0,
+  s2: 0,
+  s3: 0,
+  s4: 0,
+  s5: 0,
+  s6: 0,
+  m: 0,
+};
+const INDEXES = ["1", "2", "3", "4", "5", "6", "s1", "s2", "s3", "s4", "s5", "s6", "m"];
 
 function record(req, pathname) {
   try {
@@ -96,16 +111,18 @@ async function handle(req, res) {
   const pathname = req.url.split("?")[0];
   if (pathname === "/log") {
     try {
-      const lines = ["1", "2", "3", "4", "5", "6", "m"].map(
-        (key) => `${key}: ${hits[key] || 0}`
-      );
+      const lines = INDEXES.map((key) => `${key}: ${hits[key] || 0}`);
       lines.push("", `Total api calls: ${logs.length}`, "");
       for (const entry of logs) {
         lines.push(`${entry.time}  ${entry.ip}  ${entry.index}`);
       }
       sendText(res, 200, lines.join("\n") + "\n");
     } catch (err) {
-      sendText(res, 200, "1: 0\n2: 0\n3: 0\n4: 0\n5: 0\n6: 0\nm: 0\n");
+      sendText(
+        res,
+        200,
+        INDEXES.map((key) => `${key}: 0`).join("\n") + "\n"
+      );
     }
     return;
   }
@@ -118,12 +135,12 @@ async function handle(req, res) {
       200,
       [ 
         "Open the folder powershell where you want the files",
-        "Run for exprimenet 1: iex(irm https://cse2026bc.onrender.com/1)",
-        "Run for exprimenet 2: iex(irm https://cse2026bc.onrender.com/2)",
-        "Run for exprimenet 3: iex(irm https://cse2026bc.onrender.com/3)",
-        "Run for exprimenet 4: iex(irm https://cse2026bc.onrender.com/4)",
-        "Run for exprimenet 5: iex(irm https://cse2026bc.onrender.com/5)",
-        "Run for exprimenet 6: iex(irm https://cse2026bc.onrender.com/6)",
+        "Run for exprimenet 1 (Merkle tree verification): iex(irm https://cse2026bc.onrender.com/1)",
+        "Run for exprimenet 2 (Custom blockchain): iex(irm https://cse2026bc.onrender.com/2)",
+        "Run for exprimenet 3 (Blockchain prototype): iex(irm https://cse2026bc.onrender.com/3)",
+        "Run for exprimenet 4 (Consensus): iex(irm https://cse2026bc.onrender.com/4)",
+        "Run for exprimenet 5 (Wallet): iex(irm https://cse2026bc.onrender.com/5)",
+        "Run for exprimenet 6 (Voting): iex(irm https://cse2026bc.onrender.com/6)", 
         "Download Lab manual: https://cse2026bc.onrender.com/m",
         "",
       ].join("\n")
@@ -150,7 +167,7 @@ async function handle(req, res) {
     return;
   }
 
-  const match = /^\/([1-6])\/?$/.exec(pathname);
+  const match = /^\/(s?[1-6])\/?$/.exec(pathname);
   if (!match) {
     sendText(res, 404, "Not found\n");
     return;
